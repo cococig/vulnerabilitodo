@@ -14,5 +14,10 @@
 			"allowComments": true,
 			"allowTrailingCommas": true
 		}
+	},
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		}
 	}
 }
