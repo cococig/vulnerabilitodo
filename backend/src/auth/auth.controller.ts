@@ -6,15 +6,16 @@ import {
 	HttpStatus,
 	Post,
 	Request,
-	UseGuards,
 } from "@nestjs/common";
-import { AuthService } from "./auth.service";
+import { Public } from "./auth.decorator";
 import { SignInDto, SignUpDto } from "./auth.dto";
+import { AuthService } from "./auth.service";
 
 @Controller("auth")
 export class AuthController {
 	constructor(private authService: AuthService) {}
 
+	@Public()
 	@HttpCode(HttpStatus.OK)
 	@Post("login")
 	signIn(@Body() signInDto: SignInDto) {
@@ -26,6 +27,9 @@ export class AuthController {
 		return req.user;
 	}
 
+	@Public()
 	@Post("signup")
-	signUp(@Body() signUpDto: SignUpDto) {}
+	signUp(@Body() signUpDto: SignUpDto) {
+		return this.authService.signUp(signUpDto.username, signUpDto.password);
+	}
 }

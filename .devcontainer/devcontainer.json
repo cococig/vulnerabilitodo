@@ -7,14 +7,17 @@
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/prisma:2": {},
 		"ghcr.io/enricosecondulfo/devcontainer-features/volta:1": {},
-		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {}
+		"ghcr.io/warrenbuckley/codespace-features/sqlite:1": {},
+		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {},
+		"ghcr.io/devcontainers-contrib/features/nestjs-cli:2": {} 
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"biomejs.biome",
 				"Prisma.prisma",
-				"bradlc.vscode-tailwindcss"
+				"bradlc.vscode-tailwindcss",
+				"Angular.ng-template"
 			]
 		}
 	}
