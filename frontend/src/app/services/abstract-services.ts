@@ -3,6 +3,24 @@ type RequestBody = {
 };
 
 export abstract class BaseRestApiService {
+	protected get(
+		url: string,
+		options?: { headers?: HeadersInit },
+		needAuth = true,
+	) {
+		let authToken: string | null = null;
+		if (needAuth) authToken = localStorage.getItem("auth_token");
+
+		return fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
+				...options?.headers,
+			},
+		});
+	}
+
 	protected post(
 		url: string,
 		options: { headers?: HeadersInit; body: RequestBody },

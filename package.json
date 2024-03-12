@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Vulnerable web application for security learning",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx concurrently --kill-others \"npm run start -w frontend\" \"npm run start:dev -w backend\""
   },
   "author": "cococig",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "@nestjs/cli": "^10.3.2",
     "@tsconfig/recommended": "^1.0.3",
     "@types/node": "^20.11.20",
+    "concurrently": "^8.2.2",
     "typescript": "^5.3.3"
   },
   "workspaces": [

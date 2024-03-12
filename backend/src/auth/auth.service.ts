@@ -9,6 +9,12 @@ export class AuthService {
 		private jwtService: JwtService,
 	) {}
 
+	/**
+	 * ログイン用のメソッド。ユーザがログインに成功した場合は認証用のJWTを返す。
+	 * @param username ユーザ名
+	 * @param pass パスワード
+	 * @returns JWT
+	 */
 	async signIn(
 		username: string,
 		pass: string,
@@ -23,6 +29,12 @@ export class AuthService {
 		};
 	}
 
+	/**
+	 * 新規登録用のメソッド。新規登録後、ログイン時と同じように認証用のJWTを返す。
+	 * @param username ユーザ名
+	 * @param pass パスワード
+	 * @returns JWT
+	 */
 	async signUp(
 		username: string,
 		pass: string,

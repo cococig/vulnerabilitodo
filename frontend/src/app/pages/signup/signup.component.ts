@@ -1,5 +1,6 @@
 import { Component, inject } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 import { AuthService } from "../../services/auth.service";
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class SignupComponent {
 	private authService = inject(AuthService);
+	private router = inject(Router);
 	private formBuilder = inject(FormBuilder);
 	signUpForm = this.formBuilder.nonNullable.group({
 		username: ["", Validators.required],
@@ -22,6 +24,7 @@ export class SignupComponent {
 		const password = this.signUpForm.value.password;
 		if (this.signUpForm.valid && username && password) {
 			await this.authService.signUp(username, password);
+			this.router.navigate([""]);
 		}
 	}
 }
