@@ -1,1 +1,21 @@
 <p>{{todos}}</p>
+<!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_2.showModal()">新規追加</button>
+<dialog id="my_modal_2" class="modal">
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="font-bold text-lg">ToDoを新規登録する</h3>
+        <form [formGroup]="newTodoForm" (ngSubmit)="onSubmit()" class="flex flex-col justify-start">
+            <label for="title">タイトル</label>
+            <input type="text" name="description" id="title" formControlName="title">
+            <label for="description">詳細</label>
+            <input type="text" name="description" id="description" formControlName="description">
+            <button type="submit">登録</button>
+        </form>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>

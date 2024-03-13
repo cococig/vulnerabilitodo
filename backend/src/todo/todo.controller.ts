@@ -8,13 +8,13 @@ export class TodoController {
 
 	@Get("all")
 	async getAllTodos(@Request() req) {
-		return this.todoService.getAllTodos(req.user.id);
+		return this.todoService.getAllTodos(req.user.sub);
 	}
 
 	@Post("add")
 	async addTodo(@Request() req, @Body() addTodoDto: AddTodoDto) {
 		return this.todoService.addTodo(
-			req.user.id,
+			req.user.sub,
 			addTodoDto.title,
 			addTodoDto.description,
 		);
