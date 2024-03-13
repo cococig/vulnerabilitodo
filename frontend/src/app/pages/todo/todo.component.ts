@@ -1,4 +1,10 @@
-import { Component, OnInit, inject } from "@angular/core";
+import {
+	Component,
+	ElementRef,
+	OnInit,
+	ViewChild,
+	inject,
+} from "@angular/core";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TodoItem } from "../../../types/todo";
 import { TodoService } from "../../services/todo.service";
@@ -13,6 +19,9 @@ import { TodoService } from "../../services/todo.service";
 export class TodoComponent implements OnInit {
 	private todoService = inject(TodoService);
 	private formBuilder = inject(FormBuilder);
+
+	@ViewChild("createTodoModal") createTodoModal!: ElementRef<HTMLDialogElement>;
+
 	todos: TodoItem[] = [];
 	newTodoForm = this.formBuilder.group({
 		title: [""],
@@ -28,6 +37,7 @@ export class TodoComponent implements OnInit {
 		const description = this.newTodoForm.value.description;
 		if (title && description) {
 			await this.todoService.addTodo(title, description);
+			this.createTodoModal.nativeElement.close();
 		}
 	}
 }
