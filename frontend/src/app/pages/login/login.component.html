@@ -5,7 +5,7 @@
         <p class="text-2xl py-6">最高に脆弱な最低のTodoアプリ</p>
       </div>
       <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <form class="card-body" [formGroup]="loginForm">
+        <form class="card-body" [formGroup]="loginForm" (ngSubmit)="login()">
           <div class="form-control">
             <label class="label">
               <span class="label-text">ユーザー名</span>
@@ -23,7 +23,7 @@
             </label>
           </div>
           <div class="form-control mt-6">
-            <button (click)="login()" class="btn btn-primary">ログイン</button>
+            <button type="submit" class="btn btn-primary">ログイン</button>
           </div>
         </form>
       </div>
