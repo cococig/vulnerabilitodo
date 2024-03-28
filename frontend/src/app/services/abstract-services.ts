@@ -39,4 +39,23 @@ export abstract class BaseRestApiService {
 			body: JSON.stringify(options.body),
 		});
 	}
+
+	protected delete(
+		url: string,
+		options?: { headers?: HeadersInit; body?: RequestBody },
+		needAuth = true,
+	) {
+		let authToken: string | null = null;
+		if (needAuth) authToken = localStorage.getItem("auth_token");
+
+		return fetch(url, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
+				...options?.headers,
+			},
+			body: options?.body ? JSON.stringify(options.body) : undefined,
+		});
+	}
 }

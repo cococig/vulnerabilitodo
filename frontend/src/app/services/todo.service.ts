@@ -12,11 +12,18 @@ export class TodoService extends BaseRestApiService {
 		const response: TodoItem[] = await (await this.get(url)).json();
 		return response;
 	}
+
 	public async addTodo(title: string, description: string) {
 		const url = `${environment.apiEndpoint}/todo/add`;
 		const response: TodoItem = await (
 			await this.post(url, { body: { title, description } })
 		).json();
+		return response;
+	}
+
+	public async deleteTodo(todoId: number) {
+		const url = `${environment.apiEndpoint}/todo/${todoId}`;
+		const response: TodoItem = await (await this.delete(url)).json();
 		return response;
 	}
 }

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Request } from "@nestjs/common";
+import {
+	Body,
+	Controller,
+	Delete,
+	Get,
+	Param,
+	Post,
+	Request,
+} from "@nestjs/common";
 import { AddTodoDto } from "./todo.dto";
 import { TodoService } from "./todo.service";
 
@@ -18,5 +26,12 @@ export class TodoController {
 			addTodoDto.title,
 			addTodoDto.description,
 		);
+	}
+
+	@Delete(":id")
+	async deleteTodo(@Param("id") id: string) {
+		const parsedId = parseInt(id);
+		if (Number.isNaN(parsedId)) throw new Error("idの値が不正です");
+		return this.todoService.deleteTodo(parsedId);
 	}
 }

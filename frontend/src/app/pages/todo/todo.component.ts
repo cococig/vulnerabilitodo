@@ -8,11 +8,12 @@ import {
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { TodoItem } from "../../../types/todo";
 import { TodoService } from "../../services/todo.service";
+import { NavbarComponent } from "./components/navbar/navbar.component";
 
 @Component({
 	selector: "app-todo",
 	standalone: true,
-	imports: [ReactiveFormsModule],
+	imports: [ReactiveFormsModule, NavbarComponent],
 	templateUrl: "./todo.component.html",
 	styleUrl: "./todo.component.scss",
 })
@@ -29,7 +30,16 @@ export class TodoComponent implements OnInit {
 	});
 
 	async ngOnInit(): Promise<void> {
+		await this.updateTodos();
+	}
+
+	async updateTodos() {
 		this.todos = await this.todoService.getAllTodos();
+	}
+
+	async onDeleteTodo(todoId: number) {
+		await this.todoService.deleteTodo(todoId);
+		await this.updateTodos();
 	}
 
 	async onSubmit() {
@@ -39,5 +49,6 @@ export class TodoComponent implements OnInit {
 			await this.todoService.addTodo(title, description);
 			this.createTodoModal.nativeElement.close();
 		}
+		await this.updateTodos();
 	}
 }
