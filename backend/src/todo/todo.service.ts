@@ -7,7 +7,8 @@ export class TodoService {
 	constructor(private prisma: PrismaService) {}
 
 	/**
-	 * 特定ユーザーの全てのToDo情報を返すメソッド
+	 * 特定ユーザーの全てのToDo情報を返すメソッド。
+	 * 期限の昇順でソートする。
 	 * @param userId ユーザーID
 	 * @returns ToDo情報の配列
 	 */
@@ -18,6 +19,9 @@ export class TodoService {
 					id: userId,
 				},
 			},
+			orderBy: {
+				dueDate: "asc"
+			}
 		});
 	}
 
