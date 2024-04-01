@@ -1,33 +1,32 @@
-import {
-	Component,
-	ElementRef,
-	OnInit,
-	ViewChild,
-	inject,
-} from "@angular/core";
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
-import { TodoItem } from "../../../types/todo";
+import { CommonModule } from "@angular/common";
+import { Component, ViewChild, inject, type OnInit } from "@angular/core";
+import type { TodoItem } from "../../../types/todo";
 import { TodoService } from "../../services/todo.service";
+import { CreateTodoModalComponent } from "./components/create-todo-modal/create-todo-modal.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { TodoDetailComponent } from "./components/todo-detail/todo-detail.component";
 
 @Component({
 	selector: "app-todo",
 	standalone: true,
-	imports: [ReactiveFormsModule, NavbarComponent],
+	imports: [
+		CommonModule,
+		NavbarComponent,
+		CreateTodoModalComponent,
+		TodoDetailComponent,
+	],
 	templateUrl: "./todo.component.html",
 	styleUrl: "./todo.component.scss",
 })
 export class TodoComponent implements OnInit {
 	private todoService = inject(TodoService);
-	private formBuilder = inject(FormBuilder);
 
-	@ViewChild("createTodoModal") createTodoModal!: ElementRef<HTMLDialogElement>;
+	@ViewChild(CreateTodoModalComponent)
+	createTodoModal!: CreateTodoModalComponent;
+	@ViewChild(TodoDetailComponent) todoDetailModal!: TodoDetailComponent;
 
 	todos: TodoItem[] = [];
-	newTodoForm = this.formBuilder.group({
-		title: [""],
-		description: [""],
-	});
+	selectedTodo: TodoItem | undefined;
 
 	async ngOnInit(): Promise<void> {
 		await this.updateTodos();
@@ -42,13 +41,14 @@ export class TodoComponent implements OnInit {
 		await this.updateTodos();
 	}
 
-	async onSubmit() {
-		const title = this.newTodoForm.value.title;
-		const description = this.newTodoForm.value.description;
-		if (title && description) {
-			await this.todoService.addTodo(title, description);
-			this.createTodoModal.nativeElement.close();
+	async onSubmitTodo(result: boolean) {
+		if (result) {
+			await this.updateTodos();
 		}
-		await this.updateTodos();
+	}
+
+	onOpenDetail(todo: TodoItem) {
+		this.selectedTodo = todo;
+		this.todoDetailModal.showModal();
 	}
 }

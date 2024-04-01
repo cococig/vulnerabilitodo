@@ -40,6 +40,25 @@ export abstract class BaseRestApiService {
 		});
 	}
 
+	protected put(
+		url: string,
+		options?: { headers?: HeadersInit; body?: RequestBody },
+		needAuth = true,
+	) {
+		let authToken: string | null = null;
+		if (needAuth) authToken = localStorage.getItem("auth_token");
+
+		return fetch(url, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${authToken}`,
+				...options?.headers,
+			},
+			body: options?.body ? JSON.stringify(options.body) : undefined,
+		});
+	}
+
 	protected delete(
 		url: string,
 		options?: { headers?: HeadersInit; body?: RequestBody },

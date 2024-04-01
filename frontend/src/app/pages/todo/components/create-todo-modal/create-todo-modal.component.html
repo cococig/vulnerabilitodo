@@ -1,0 +1,28 @@
+<dialog #createTodoModal class="modal">
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <h3 class="font-bold text-lg">ToDoを新規登録する</h3>
+        <form [formGroup]="newTodoForm" (ngSubmit)="onSubmit()" class="flex flex-col justify-start gap-2">
+            <div class="flex flex-col">
+                <label for="title">タイトル</label>
+                <input type="text" name="description" id="title" formControlName="title" class="input input-bordered">
+            </div>
+            <div class="flex flex-col">
+                <label for="description">詳細</label>
+                <textarea name="description" id="description" formControlName="description"
+                    class="textarea textarea-bordered"> </textarea>
+            </div>
+            <div class="flex flex-col">
+                <label for="due-date">期限</label>
+                <input type="datetime-local" id="due-date" class="input input-bordered" formControlName="dueDate"
+                    step="1800" />
+            </div>
+            <button type="submit" class="btn btn-primary">登録</button>
+        </form>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>

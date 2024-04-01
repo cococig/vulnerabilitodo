@@ -1,0 +1,51 @@
+<dialog #todoDetailModal class="modal">
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <form [formGroup]="updateTodoForm">
+            @if (isEditing) {
+            <div class="flex flex-col justify-start">
+                <input type="text" class="input input-bordered w-3/4" formControlName="title">
+                <textarea name="description" id="description" formControlName="description"
+                    class="mt-4 textarea textarea-bordered"> </textarea>
+
+            </div>
+            } @else {
+            <h3 class="font-bold text-lg">{{updateTodoForm.value.title}}</h3>
+            <div class="mt-4" [innerHTML]="description"></div>
+            }
+            <div class="divider"></div>
+            <div class="flex justify-between items-end w-full">
+                <div class="flex flex-col items-start">
+                    <div class="flex justify-center items-center gap-3">
+                        <div class="font-semibold w-14">期限:</div>
+                        @if (isEditing) {
+                        <input type="datetime-local" class="input input-bordered" formControlName="dueDate"
+                            step="1800" />
+                        } @else {
+                        <div>{{updateTodoForm.value.dueDate+":00.000+09:00" | date:'yyyy/MM/dd hh:mm'}} まで</div>
+                        }
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="font-semibold w-14">作成日:</div>
+                        <div>{{todo?.createdAt | date:'yyyy/MM/dd hh:mm'}}</div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="font-semibold w-14">更新日:</div>
+                        <div>{{todo?.updatedAt | date:'yyyy/MM/dd hh:mm'}}</div>
+                    </div>
+                </div>
+                @if (isEditing) {
+                <button class="btn btn-primary" (click)="onUpdateSubmit()">更新</button>
+                <button class="btn btn-secondary" (click)="isEditing=false">キャンセル</button>
+                }@else {
+                <button class="btn" (click)="isEditing=true">編集</button>
+                }
+            </div>
+        </form>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>

@@ -1,50 +1,43 @@
 <app-navbar></app-navbar>
 
 <div class="px-8 flex flex-col gap-4">
-    <h1 class="text-2xl font-bold">Todoリスト</h1>
-    <ul class="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box w-max">
-        <li><a (click)="createTodoModal.showModal()">新規作成</a></li>
-    </ul>
+    <h1 class="text-2xl font-bold">ToDoリスト</h1>
+    <button type="button" class="btn btn-primary w-max" (click)="createTodoModal.showModal()">新規作成</button>
 
-    <div class="grid grid-cols-4 gap-4">
-        @for (todo of todos; track todo.id) {
-        <div class="card w-96 bg-base-100 shadow-xl">
-            <div class="card-body">
-                <h2 class="card-title">{{todo.title}}</h2>
-                <p>{{todo.description}}</p>
-                <div class="card-actions justify-end">
-                    <button class="btn btn-square btn-error" (click)="onDeleteTodo(todo.id)">
-                        <span class="i-flowbite-trash-bin-outline"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        }@empty {
-        <p>no items</p>
-        }
-    </div>
+    <table class="table table-zebra">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>期限</th>
+                <th>作成日</th>
+                <th>更新日</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (todo of todos; track todo.id) {
+            <tr class="hover">
+                <td>{{todo.title}}</td>
+                <td>{{todo.dueDate | date:'yyyy/MM/dd hh:mm'}} まで</td>
+                <td>{{todo.createdAt | date:'yyyy/MM/dd hh:mm'}}</td>
+                <td>{{todo.updatedAt | date:'yyyy/MM/dd hh:mm'}}</td>
+                <td>
+                    <div class="flex justify-end items-center gap-2">
+                        <button class="btn btn-primary" (click)="onOpenDetail(todo)">詳細を見る</button>
+                        <button class="btn btn-square btn-error" (click)="onDeleteTodo(todo.id)">
+                            <span class="i-flowbite-trash-bin-outline"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }@empty {
+            <tr class="hover">
+                <td colspan="3">ToDoはありません</td>
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<!-- Open the modal using ID.showModal() method -->
-<dialog #createTodoModal class="modal">
-    <div class="modal-box">
-        <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-        </form>
-        <h3 class="font-bold text-lg">ToDoを新規登録する</h3>
-        <form [formGroup]="newTodoForm" (ngSubmit)="onSubmit()" class="flex flex-col justify-start gap-2">
-            <div class="flex flex-col">
-                <label for="title">タイトル</label>
-                <input type="text" name="description" id="title" formControlName="title" class="input input-bordered">    
-            </div>
-            <div class="flex flex-col">
-                <label for="description">詳細</label>
-                <textarea name="description" id="description" formControlName="description"  class="textarea textarea-bordered"> </textarea>   
-            </div>
-            <button type="submit" class="btn btn-primary">登録</button>
-        </form>
-    </div>
-    <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-    </form>
-</dialog>
+<app-create-todo-modal [updateTodos]="updateTodos" (submitEvent)="onSubmitTodo($event)"></app-create-todo-modal>
+<app-todo-detail [todo]="selectedTodo" (submitEvent)="onSubmitTodo($event)"></app-todo-detail>

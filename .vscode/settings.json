@@ -9,5 +9,10 @@
     "[prisma]": {
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "Prisma.prisma"
+    },
+    "[html]": {
+        "editor.suggest.insertMode": "replace",
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.html-language-features"
     }
 }
