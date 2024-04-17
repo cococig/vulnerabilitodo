@@ -3,13 +3,16 @@
 セキュリティミニキャンプ教材用脆弱ToDoアプリ
 
 ## 環境構築
-1. `npm ci`を実行
-2. `backend/.env`ファイルを作成し、`DATABASE_URL="file:./dev.db"`と書き込んで保存
-3. `npm run migrate`を実行し、DBを作成
+1. （Node.js環境が整っていない場合）`node_install.sh`を実行
+2. `init.sh`を実行
 
 ## 実行
-1. `npm run start`でフロントエンドとバックエンドが両方立ち上がる
-2. http://localhost:4200 がフロントエンド、http://localhost:3000 がバックエンド
+1. `start.sh`を実行でフロントエンドとバックエンドが両方立ち上がる
+2. http://<hostname>:4200 がフロントエンド、http://<hostname>:3000 がバックエンド
+
+## テスト用ユーザー情報
+- username: `test_user`
+- password: `test_password`
 
 ## 現在の主な機能と脆弱性
 - ログイン機能

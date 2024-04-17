@@ -117,6 +117,35 @@ async function main() {
 			},
 		},
 	});
+	const user5 = await prisma.user.upsert({
+		where: {
+			name: "test_user"
+		},
+		update:{},
+		create: {
+			name: "test_user",
+			password: "test_password",
+			todo: {
+				create: [
+					{
+						title: "Todoテスト1",
+						description: "Todoテスト内容1",
+						dueDate: new Date()
+					},
+					{
+						title: "Todoテスト2",
+						description: "Todoテスト内容2",
+						dueDate: new Date()
+					},
+					{
+						title: "Todoテスト3",
+						description: "Todoテスト内容3",
+						dueDate: new Date()
+					}
+				]
+			}
+		},
+	})
 }
 
 main()
