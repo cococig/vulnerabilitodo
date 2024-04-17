@@ -1,8 +1,16 @@
+import { environment } from "../../environments/environment";
+
 type RequestBody = {
 	[key in string]: string | number;
 };
 
 export abstract class BaseRestApiService {
+	protected getApiEndpoint(): string {
+		return environment.apiEndpoint !== ""
+			? environment.apiEndpoint
+			: `http://${window.location.hostname}:3000`;
+	}
+
 	protected get(
 		url: string,
 		options?: { headers?: HeadersInit },

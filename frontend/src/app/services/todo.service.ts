@@ -1,5 +1,4 @@
 import { Injectable, inject } from "@angular/core";
-import { environment } from "../../environments/environment";
 import { TodoItem } from "../../types/todo";
 import { BaseRestApiService } from "./abstract-services";
 import { AuthService } from "./auth.service";
@@ -16,7 +15,7 @@ export class TodoService extends BaseRestApiService {
 		const queryParams = {
 			uid: uid.toString(),
 		};
-		const url = `${environment.apiEndpoint}/todo/all?${new URLSearchParams(
+		const url = `${this.getApiEndpoint()}/todo/all?${new URLSearchParams(
 			queryParams,
 		)}`;
 		const response: TodoItem[] = await (await this.get(url)).json();
@@ -24,7 +23,7 @@ export class TodoService extends BaseRestApiService {
 	}
 
 	public async addTodo(title: string, description: string, dueDate: Date) {
-		const url = `${environment.apiEndpoint}/todo/add`;
+		const url = `${this.getApiEndpoint()}/todo/add`;
 		const response: TodoItem = await (
 			await this.post(url, {
 				body: { title, description, dueDate: dueDate.toISOString() },
@@ -39,7 +38,7 @@ export class TodoService extends BaseRestApiService {
 		description: string,
 		dueDate: Date,
 	) {
-		const url = `${environment.apiEndpoint}/todo/${todoId}`;
+		const url = `${this.getApiEndpoint()}/todo/${todoId}`;
 		const response: TodoItem = await (
 			await this.put(url, {
 				body: { title, description, dueDate: dueDate.toISOString() },
@@ -49,7 +48,7 @@ export class TodoService extends BaseRestApiService {
 	}
 
 	public async deleteTodo(todoId: number) {
-		const url = `${environment.apiEndpoint}/todo/${todoId}`;
+		const url = `${this.getApiEndpoint()}/todo/${todoId}`;
 		const response: TodoItem = await (await this.delete(url)).json();
 		return response;
 	}

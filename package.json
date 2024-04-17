@@ -4,8 +4,10 @@
   "description": "Vulnerable web application for security learning",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "npm run migrate && npm run prisma:seed -w backend",
     "migrate": "npm run prisma:migrate -w backend",
-    "start": "npx concurrently --kill-others \"npm run start -w frontend\" \"npm run start:dev -w backend\""
+    "start": "npx concurrently --kill-others \"npm run start -w frontend\" \"npm run start:dev -w backend\"",
+    "start:production": "npx concurrently --kill-others \"npm run start:production -w frontend\" \"npm run start:dev -w backend\""
   },
   "author": "cococig",
   "license": "ISC",

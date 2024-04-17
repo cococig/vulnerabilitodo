@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { jwtDecode } from "jwt-decode";
-import { environment } from "../../environments/environment";
 import { AuthResponseBody } from "../../types/auth";
 import { JwtPayload } from "../../types/jwt";
 import { BaseRestApiService } from "./abstract-services";
@@ -37,7 +36,7 @@ export class AuthService extends BaseRestApiService {
 	}
 
 	public async login(username: string, password: string) {
-		const url = `${environment.apiEndpoint}/auth/login`;
+		const url = `${this.getApiEndpoint()}/auth/login`;
 		const response = await this.post(
 			url,
 			{ body: { username, password } },
@@ -52,7 +51,7 @@ export class AuthService extends BaseRestApiService {
 	}
 
 	public async signUp(username: string, password: string) {
-		const url = `${environment.apiEndpoint}/auth/signup`;
+		const url = `${this.getApiEndpoint()}/auth/signup`;
 		const response = await this.post(
 			url,
 			{ body: { username, password } },
