@@ -6,6 +6,9 @@
 1. （Node.js環境が整っていない場合）`node_install.sh`を実行
 2. `init.sh`を実行
 
+## 環境構築(Raspberry Piの場合)
+1. `init_raspberrypi.sh`を実行
+
 ## 実行
 1. `start.sh`を実行でフロントエンドとバックエンドが両方立ち上がる
 2. http://<hostname>:4200 がフロントエンド、http://<hostname>:3000 がバックエンド
