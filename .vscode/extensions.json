@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "biomejs.biome",
+        "Prisma.prisma",
+        "bradlc.vscode-tailwindcss",
+        "Angular.ng-template"
+    ],
+    "unwantedRecommendations": [
+        "dbaeumer.vscode-eslint"
+    ]
+}

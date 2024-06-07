@@ -1,12 +1,24 @@
-# Vulnerabilitodo(仮名)
+# Vulnerabilitodo
 ## 概要
-セキュリティミニキャンプ教材用脆弱ToDoアプリ
+セキュアコーディング教材用脆弱ToDoアプリ
 
 ## 環境構築
-1. （Node.js環境が整っていない場合）`node_install.sh`を実行
+### VSCode devcontainerを使う場合
+1. devcontainerを使って開発コンテナを作成
 2. `init.sh`を実行
 
-## 環境構築(Raspberry Piの場合)
+### Dockerfileを直接使う場合
+1. プロジェクトのルートにあるDockerfileを使ってコンテナを作成
+2. `init.sh`を実行後、推奨される拡張機能をインストール
+3. `apt install sqlite3`を実行
+4. (必須ではないが推奨)[@angular/cli](https://www.npmjs.com/package/@angular/cli)と[@nestjs/cli](https://www.npmjs.com/package/@nestjs/cli)をグローバルインストールしておく
+
+### Dockerを使用しない場合
+1. （Node.js環境が整っていない場合）`node_install.sh`を実行
+ - [Volta](https://volta.sh/)がインストールされる
+2. `init.sh`を実行
+
+### Raspberry Piの場合
 1. `init_raspberrypi.sh`を実行
 
 ## 実行

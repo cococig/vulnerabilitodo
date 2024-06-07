@@ -3,7 +3,9 @@
 {
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+	"build": {
+		"dockerfile": "../Dockerfile"
+	},
 	"features": {
 		"ghcr.io/devcontainers-contrib/features/prisma:2": {},
 		"ghcr.io/enricosecondulfo/devcontainer-features/volta:1": {},
@@ -17,7 +19,8 @@
 				"biomejs.biome",
 				"Prisma.prisma",
 				"bradlc.vscode-tailwindcss",
-				"Angular.ng-template"
+				"Angular.ng-template",
+				"-dbaeumer.vscode-eslint"
 			]
 		}
 	},
